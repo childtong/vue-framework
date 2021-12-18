@@ -1,0 +1,27 @@
+{
+  "name": "vue-framework",
+  "version": "1.0.0",
+  "description": "vue架构基础",
+  "main": "index.js",
+  "scripts": {
+    "serve": "rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/childtong/vue-framework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/childtong/vue-framework/issues"
+  },
+  "homepage": "https://github.com/childtong/vue-framework#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "rollup": "^2.61.1",
+    "rollup-plugin-babel": "^4.4.0"
+  }
+}
