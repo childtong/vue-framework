@@ -51,7 +51,11 @@
       _classCallCheck(this, Observer);
 
       //对对象中的所有属性进行劫持
-      this.walk(data);
+      //用户很少通过索引数组 arr[98]=100,所以内部想到不对索引进行拦截，因为消耗严重
+      //经常使用 push shift pop unshift reverse sort splice 7个变异方法，可能会更改原数组
+      if (Array.isArray(data)) ; else {
+        this.walk(data); //对象劫持的拦截
+      }
     }
 
     _createClass(Observer, [{
@@ -108,12 +112,29 @@
 
   }
 
+  function proxy(vm, source, key) {
+    Object.defineProperty(vm, key, {
+      get: function get() {
+        return vm[source][key];
+      },
+      set: function set(newVal) {
+        vm[source][key] = newVal;
+      }
+    });
+  }
+
   function initData(vm) {
+    //vue的内部变量以$开头，不会进行代理
     var data = vm.$options.data; //vue2 会将data中对所有数据，进行数据劫持 Object.defineProperty
     //这个时候vm和data没有关系，通过_data进行关联
 
     data = vm._data = isFunction(data) ? data.call(vm) : data;
-    console.log(vm);
+
+    for (var key in data) {
+      //vm.name =>am._data.name 代理
+      proxy(vm, '_data', key);
+    }
+
     observer(data);
   }
 

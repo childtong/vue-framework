@@ -1,0 +1,1 @@
+export let arrayMethods = Object.create(Array.prototype)

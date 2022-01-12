@@ -3,7 +3,14 @@ import { isObject } from '../util'
 //检测数据变化，类有类型，对象无类型
 class Observer {
     constructor(data) { //对对象中的所有属性进行劫持
-        this.walk(data)
+        //用户很少通过索引数组 arr[98]=100,所以内部想到不对索引进行拦截，因为消耗严重
+        //经常使用 push shift pop unshift reverse sort splice 7个变异方法，可能会更改原数组
+        if (Array.isArray(data)) { //数组劫持的拦截
+            //对数组原来的方法进行改写,切片编程 高阶函数（包装一层）
+            data.__proto__ =
+        } else {
+            this.walk(data) //对象劫持的拦截
+        }
     }
     walk(data) { //对象
         Object.keys(data).forEach(key => {
