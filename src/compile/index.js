@@ -62,6 +62,10 @@ function parserHTML(html) {
         if (textEnd > 0) {
             text = html.substring(0, textEnd)
         }
+        if(text){
+            chars(text)
+            advance(text.length)
+        }
 
     }
 }

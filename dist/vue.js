@@ -267,8 +267,14 @@
         // }
       }
 
+      var text = void 0; //  {{name}}</div>
+
       if (textEnd > 0) {
-        html.substring(0, textEnd);
+        text = html.substring(0, textEnd);
+      }
+
+      if (text) {
+        advance(text.length);
       }
     }
   }
